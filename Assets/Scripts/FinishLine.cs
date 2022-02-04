@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class FinishLine : MonoBehaviour
 {
-    float LevelWinDelay = 1f;
+    [SerializeField] float LevelWinDelay = 1f;
+    [SerializeField] ParticleSystem FinishEffect;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Player")
         {
+            FinishEffect.Play();    
+            GetComponent<AudioSource>().Play();
             Invoke("ReloadScene", LevelWinDelay);
         }
     }
